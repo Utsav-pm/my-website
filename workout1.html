@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Workout Personalisation – Intake Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    /* ----------  Basic layout & typography  ---------- */
+    :root{
+        --c1:#222;
+        --c2:#444;
+        --c3:#666;
+        --accent:#0077ff;
+        --bg:#f7f9fa;
+        --radius:6px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Arial,sans-serif;}
+    body{background:var(--bg);color:var(--c1);line-height:1.5;padding:1.2rem;}
+    h1{text-align:center;margin:0 0 1.6rem;}
+    fieldset{border:1px solid var(--c2);border-radius:var(--radius);margin:1rem 0;padding:1rem;background:#fff;}
+    legend{font-weight:600;padding:0 .4rem;}
+    label{display:block;margin:.4rem 0 .2rem;font-weight:500;color:var(--c2);}
+    input[type=text],textarea,select{
+        width:100%;padding:.4rem .5rem;border:1px solid var(--c3);
+        border-radius:var(--radius);background:#fff;font-size:.95rem;
+    }
+    textarea{resize:vertical;min-height:70px;}
+    input[type=range]{width:100%;}
+    .inline{display:inline-block;margin-right:.8rem;}
+    .multi-col{columns:240px 2;column-gap:1.2rem;}
+    .hint{font-size:.75rem;color:var(--c3);}
+    button{
+        display:block;width:100%;max-width:300px;margin:2rem auto 0;
+        padding:.7rem 1rem;font-size:1.05rem;font-weight:600;
+        background:var(--accent);border:none;border-radius:var(--radius);color:#fff;cursor:pointer;
+    }
+    button:hover{filter:brightness(1.1);}
+    .slider-value{font-weight:600;margin-left:.4rem;}
+    @media (min-width:700px){
+        form{max-width:900px;margin:0 auto;}
+    }
+</style>
+</head>
+<body>
+
+<h1>Workout Personalisation&nbsp;–&nbsp;Intake Form</h1>
+
+<form id="workoutForm">
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Movement Types <span class="hint">(select all that apply)</span></legend>
+
+        <label>Everyday Activities</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="movement_everyday" value="Walking"> Walking</label>
+            <label class="inline"><input type="checkbox" name="movement_everyday" value="Household movement"> Household movement</label>
+            <label class="inline"><input type="checkbox" name="movement_everyday" value="Active Commuting"> Active Commuting</label>
+            <label class="inline"><input type="checkbox" name="movement_everyday" value="None currently"> None currently</label>
+            <label class="inline"><input type="checkbox" name="movement_everyday" value="Other"> Other (specify)</label>
+            <input type="text" name="movement_everyday_other" placeholder="If other, please specify">
+        </div>
+
+        <label>Mind & Body Workouts</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="movement_mindbody" value="Yoga"> Yoga</label>
+            <label class="inline"><input type="checkbox" name="movement_mindbody" value="Pilates"> Pilates</label>
+        </div>
+
+        <label>Structured Workouts &amp; Fitness Training</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="movement_structured" value="Gym"> Gym</label>
+            <label class="inline"><input type="checkbox" name="movement_structured" value="Home Workouts"> Home Workouts</label>
+            <label class="inline"><input type="checkbox" name="movement_structured" value="Functional Training"> Functional Training</label>
+            <label class="inline"><input type="checkbox" name="movement_structured" value="Aerobics/HIIT"> Aerobics/HIIT</label>
+            <label class="inline"><input type="checkbox" name="movement_structured" value="Zumba/Dance Fitness"> Zumba/Dance Fitness</label>
+            <label class="inline"><input type="checkbox" name="movement_structured" value="Martial Arts/Boxing"> Martial Arts/Boxing</label>
+        </div>
+
+        <label>Outdoor &amp; Sport Activities</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="movement_outdoor" value="Jogging/Running"> Jogging/Running</label>
+            <label class="inline"><input type="checkbox" name="movement_outdoor" value="Cycling"> Cycling</label>
+            <label class="inline"><input type="checkbox" name="movement_outdoor" value="Swimming"> Swimming</label>
+            <label class="inline"><input type="checkbox" name="movement_outdoor" value="Outdoor Sports"> Outdoor Sports</label>
+            <label class="inline"><input type="checkbox" name="movement_outdoor" value="Hiking/Trekking"> Hiking/Trekking</label>
+        </div>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Workout Consistency</legend>
+
+        <label>Days of Workout per Week:
+            <span class="slider-value" id="daysVal">3</span>
+        </label>
+        <input type="range" name="days_per_week" id="daysRange" min="0" max="7" value="3">
+
+        <label>Duration per Session</label>
+        <select name="session_duration">
+            <option value="<20"> &lt; 20 mins</option>
+            <option value="20-40">20–40 mins</option>
+            <option value="40-60">40–60 mins</option>
+            <option value=">60">&gt; 60 mins</option>
+        </select>
+
+        <label>Time of Day Preference</label>
+        <select name="time_of_day">
+            <option>Morning</option><option>Afternoon</option><option>Evening</option><option>Night</option><option>Varies</option>
+        </select>
+
+        <label>Frequency of Switching Workout Types</label>
+        <select name="switch_frequency">
+            <option>Weekly</option><option>Monthly</option><option>Rarely</option>
+        </select>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Movement Limitations</legend>
+
+        <label>Areas with Pain / Injury / Tightness</label>
+        <textarea name="pain_areas" placeholder="e.g., knees, lower back, shoulders"></textarea>
+
+        <label>Type of Issue</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="issue_type" value="Joint pain"> Joint pain</label>
+            <label class="inline"><input type="checkbox" name="issue_type" value="Stiffness"> Stiffness</label>
+            <label class="inline"><input type="checkbox" name="issue_type" value="Limited range of motion"> Limited range of motion</label>
+            <label class="inline"><input type="checkbox" name="issue_type" value="Discomfort"> Discomfort</label>
+        </div>
+
+        <label>Triggered By</label>
+        <input type="text" name="triggered_by" placeholder="e.g., running, sitting too long, lifting weights">
+
+        <label>Intensity: <span class="slider-value" id="intensityVal">5</span></label>
+        <input type="range" name="intensity" id="intensityRange" min="1" max="10" value="5">
+
+        <label>Frequency</label>
+        <select name="issue_frequency">
+            <option>Rarely</option><option>Weekly</option><option>2–3x per week</option><option>Daily</option>
+        </select>
+
+        <label>Diagnosis Status</label>
+        <select name="diagnosis">
+            <option>Diagnosed</option><option>Self-managed</option><option>Undiagnosed</option>
+        </select>
+
+        <label>History of Surgery or Physical Therapy</label>
+        <input type="text" name="history_surgery" placeholder="Please mention details if applicable">
+
+        <label>Movement‑Related Fears</label>
+        <input type="text" name="movement_fears" placeholder="e.g., squats, overhead lifting, twisting">
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Body Metrics &amp; Health Stats</legend>
+
+        <label>Date of Birth</label>
+        <input type="date" name="dob">
+
+        <label>Gender</label>
+        <select name="gender">
+            <option>Male</option><option>Female</option><option>Non-binary</option><option>Prefer not to say</option><option>Other</option>
+        </select>
+
+        <label>Resting Heart Rate (bpm)</label>
+        <input type="text" name="resting_hr" placeholder="80">
+
+        <label>Height (cm)</label>
+        <input type="number" name="height_cm" id="height" placeholder="170">
+
+        <label>Weight (kg)</label>
+        <input type="number" name="weight_kg" id="weight" placeholder="65">
+
+        <label>BMI (auto‑calculated)</label>
+        <input type="text" name="bmi" id="bmi" placeholder="24" readonly>
+
+        <label>Body Fat %</label><input type="text" name="body_fat">
+        <label>Muscle %</label><input type="text" name="muscle">
+        <label>Lean Mass</label><input type="text" name="lean_mass">
+        <label>Visceral Fat</label><input type="text" name="visceral_fat">
+        <label>Bone Mass</label><input type="text" name="bone_mass">
+        <label>Water %</label><input type="text" name="water_pct">
+        <label>Waist‑to‑Hip Ratio</label><input type="text" name="waist_hip">
+        <label>Blood Pressure</label><input type="text" name="bp" placeholder="120/80">
+        <label>VO₂ Max</label><input type="text" name="vo2">
+        <label>Posture Analysis</label><input type="text" name="posture">
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Mobility Assessment</legend>
+
+        <!-- Create a helper for repetitive selects -->
+        <script>
+        const mobilityChoices = ["Easy","Slight Strain","Hard","Painful","Unable to perform"];
+        function addMobility(id,labelText,instruction){
+            document.write(`<label>${labelText}<span class="hint"> – ${instruction}</span></label>`);
+            document.write(`<select name="${id}">`);
+            mobilityChoices.forEach(c=>document.write(`<option>${c}</option>`));
+            document.write(`</select>`);
+        }
+        </script>
+
+        <script>
+            addMobility("toe_touch","Toe Touch",
+            "Stand tall and slowly bend forward to touch your toes, knees straight.");
+
+            addMobility("full_squat","Full Squat Hold",
+            "Squat down as low as you can and hold for 10 s.");
+
+            addMobility("oh_reach","Overhead Arm Reach",
+            "Raise both arms overhead without arching your back.");
+
+            addMobility("torso_rotation","Torso Rotation Range",
+            "Cross arms, rotate torso left & right.");
+
+            addMobility("calf_ankle","Calf / Ankle Mobility",
+            "Lunge or use stair; push front knee forward keeping heel down.");
+
+            addMobility("hip_flex","Hip Flexibility",
+            "Sit cross‑legged or deep lunge.");
+
+            addMobility("neck_shoulder","Neck & Shoulder Rotation",
+            "Turn head, roll shoulders in circles.");
+        </script>
+
+        <label>Comments or Notes</label>
+        <textarea name="mobility_notes" placeholder="Optional: add observations or difficulties"></textarea>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Self‑Rating</legend>
+
+        <label>Current Perceived Fitness Level:
+            <span class="slider-value" id="fitnessVal">5</span>
+            <span class="hint">(0 = very poor, 10 = excellent)</span>
+        </label>
+        <input type="range" name="fitness_level" id="fitnessRange" min="0" max="10" value="5">
+
+        <label>Energy After Physical Activity:
+            <span class="slider-value" id="energyVal">5</span>
+        </label>
+        <input type="range" name="energy_after" id="energyRange" min="0" max="10" value="5">
+
+        <label>Confidence in Body Movement:
+            <span class="slider-value" id="confidenceVal">5</span>
+        </label>
+        <input type="range" name="confidence" id="confidenceRange" min="0" max="10" value="5">
+
+        <label>When Do You Feel Most Energetic?</label>
+        <select name="energetic_time">
+            <option>Morning</option><option>Afternoon</option><option>Evening</option><option>It varies</option>
+        </select>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Workout Style &amp; Format Preferences</legend>
+
+        <label>Do You Have Access to a Gym?</label>
+        <select name="gym_access"><option>Yes</option><option>No</option><option>Sometimes</option></select>
+
+        <label>Home Equipment Available</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Yoga mat"> Yoga mat</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Resistance bands"> Resistance bands</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Dumbbells"> Dumbbells</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Barbell"> Barbell</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Kettlebell"> Kettlebell</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Treadmill / Bike"> Treadmill / Bike</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Foam roller"> Foam roller</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Full-length mirror"> Full-length mirror</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="Pull-up bar"> Pull‑up bar</label>
+            <label class="inline"><input type="checkbox" name="home_equipment" value="None"> None of the above</label>
+        </div>
+
+        <label>Outdoor Accessibility</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="outdoor_access" value="Safe outdoor space"> Safe outdoor space near home</label>
+            <label class="inline"><input type="checkbox" name="outdoor_access" value="Track"> Walking/jogging track</label>
+            <label class="inline"><input type="checkbox" name="outdoor_access" value="Park"> Park or open area</label>
+            <label class="inline"><input type="checkbox" name="outdoor_access" value="Cycling route"> Cycling route</label>
+            <label class="inline"><input type="checkbox" name="outdoor_access" value="Stairs"> Stairs / Elevation</label>
+            <label class="inline"><input type="checkbox" name="outdoor_access" value="Not accessible"> Not accessible or unsafe</label>
+        </div>
+
+        <label>Space Limitations or Constraints</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="space_limits" value="Small space"> Small workout space</label>
+            <label class="inline"><input type="checkbox" name="space_limits" value="Shared area"> Shared/common area</label>
+            <label class="inline"><input type="checkbox" name="space_limits" value="Noisy"> Noisy/distracting environment</label>
+            <label class="inline"><input type="checkbox" name="space_limits" value="Low ceiling"> Low ceiling height</label>
+            <label class="inline"><input type="checkbox" name="space_limits" value="Delicate flooring"> Delicate flooring</label>
+            <label class="inline"><input type="checkbox" name="space_limits" value="None"> None</label>
+        </div>
+
+        <label>Availability of Workout Space During Preferred Hours</label>
+        <select name="space_availability">
+            <option>Always available</option><option>Usually available</option><option>Sometimes available</option><option>Rarely available</option>
+        </select>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Behavioral &amp; Adherence Personality</legend>
+
+        <label>Planning Style</label>
+        <select name="planning_style">
+            <option>Strict and scheduled</option><option>Flexible but consistent</option><option>Spontaneous / go with the flow</option>
+        </select>
+
+        <label>Need for External Accountability</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="accountability" value="Reminders"> Reminders/notifications</label>
+            <label class="inline"><input type="checkbox" name="accountability" value="Streak tracking"> Streak tracking</label>
+            <label class="inline"><input type="checkbox" name="accountability" value="Coach prompts"> Coach/trainer prompts</label>
+            <label class="inline"><input type="checkbox" name="accountability" value="Community check-ins"> Community/partner check-ins</label>
+            <label class="inline"><input type="checkbox" name="accountability" value="None"> None needed</label>
+        </div>
+
+        <label>Primary Motivation Type</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="motivation" value="Competition"> Competition/performance goals</label>
+            <label class="inline"><input type="checkbox" name="motivation" value="Curiosity"> Curiosity/discovery</label>
+            <label class="inline"><input type="checkbox" name="motivation" value="Mood"> Mood enhancement/mental clarity</label>
+            <label class="inline"><input type="checkbox" name="motivation" value="Health"> Health & longevity</label>
+            <label class="inline"><input type="checkbox" name="motivation" value="Appearance"> Physical appearance/body image</label>
+            <label class="inline"><input type="checkbox" name="motivation" value="Skill"> Skill development/movement mastery</label>
+        </div>
+
+        <label>Preferred Feedback Format</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="feedback_format" value="Numbers"> Numbers/stats</label>
+            <label class="inline"><input type="checkbox" name="feedback_format" value="Graphs"> Graphs/visuals</label>
+            <label class="inline"><input type="checkbox" name="feedback_format" value="Summaries"> Quick summaries</label>
+            <label class="inline"><input type="checkbox" name="feedback_format" value="Verbal"> Verbal or written guidance</label>
+            <label class="inline"><input type="checkbox" name="feedback_format" value="Photos"> Progress photos/videos</label>
+            <label class="inline"><input type="checkbox" name="feedback_format" value="None"> Don’t want feedback</label>
+        </div>
+
+        <label>What Challenges Your Consistency?</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="consistency_challenges" value="Lack of time"> Lack of time</label>
+            <label class="inline"><input type="checkbox" name="consistency_challenges" value="Low motivation"> Low motivation</label>
+            <label class="inline"><input type="checkbox" name="consistency_challenges" value="Boredom"> Boredom/repetition</label>
+            <label class="inline"><input type="checkbox" name="consistency_challenges" value="Stress"> Stress or life events</label>
+            <label class="inline"><input type="checkbox" name="consistency_challenges" value="Unclear progress"> Unclear progress</label>
+            <label class="inline"><input type="checkbox" name="consistency_challenges" value="Lack accountability"> Lack of accountability</label>
+        </div>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Physical Recovery Signals</legend>
+
+        <label>Sleep Quality Impact on Movement</label>
+        <select name="sleep_quality">
+            <option>Consistently refreshed and ready</option>
+            <option>Sometimes sluggish / tired</option>
+            <option>Frequently low energy or stiff</option>
+            <option>Not sure</option>
+        </select>
+
+        <label>Waking Up Sore or Fatigued</label>
+        <select name="sore_mornings">
+            <option>Rarely</option><option>Sometimes</option><option>Often</option><option>Every day</option>
+        </select>
+
+        <label>Recovery Time Between Sessions</label>
+        <select name="recovery_time">
+            <option>Recover within a few hours</option>
+            <option>Need a full day</option>
+            <option>Need 2+ days</option>
+            <option>Still feel sore when training again</option>
+        </select>
+
+        <label>Post‑Workout Fatigue Levels:
+            <span class="slider-value" id="fatigueVal">5</span>
+            <span class="hint">(1 = none, 10 = exhausted)</span>
+        </label>
+        <input type="range" name="post_fatigue" id="fatigueRange" min="1" max="10" value="5">
+
+        <label>Recovery Aids Used</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="recovery_aids" value="Foam roller"> Foam roller</label>
+            <label class="inline"><input type="checkbox" name="recovery_aids" value="Massage gun"> Massage gun/therapy</label>
+            <label class="inline"><input type="checkbox" name="recovery_aids" value="Stretch"> Recovery yoga/stretch</label>
+            <label class="inline"><input type="checkbox" name="recovery_aids" value="Cold exposure"> Cold exposure/ice bath</label>
+            <label class="inline"><input type="checkbox" name="recovery_aids" value="Compression tools"> Compression tools</label>
+            <label class="inline"><input type="checkbox" name="recovery_aids" value="Sleep"> Sleep/naps</label>
+            <label class="inline"><input type="checkbox" name="recovery_aids" value="None"> None</label>
+        </div>
+
+        <label>Caffeine or Stimulant Use Before Training</label>
+        <select name="caffeine_use">
+            <option>Not at all</option><option>Sometimes (1–2x per week)</option><option>Frequently (3+ sessions)</option><option>Daily habit</option>
+        </select>
+
+        <label>Overtraining or Burnout Patterns</label>
+        <select name="overtraining">
+            <option>Yes, confirmed by coach/professional</option>
+            <option>I suspect I might be overtraining</option>
+            <option>Unsure</option>
+            <option>No, I recover well</option>
+        </select>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <fieldset>
+        <legend>Lifestyle</legend>
+
+        <label>Workload / Stress Level</label>
+        <select name="stress_level">
+            <option>Low</option><option>Medium</option><option>High</option><option>Varies day-to-day</option>
+        </select>
+
+        <label>Commute Length and Time</label>
+        <input type="text" name="commute" placeholder="e.g., 30 min one‑way, WFH on Fridays">
+
+        <label>Household Demands</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="household" value="Children"> Children</label>
+            <label class="inline"><input type="checkbox" name="household" value="Elders"> Elders needing assistance</label>
+            <label class="inline"><input type="checkbox" name="household" value="Shared space"> Shared space</label>
+            <label class="inline"><input type="checkbox" name="household" value="Chores"> Household chores</label>
+            <label class="inline"><input type="checkbox" name="household" value="Pets"> Pets</label>
+            <label class="inline"><input type="checkbox" name="household" value="None"> None of the above</label>
+        </div>
+
+        <label>Travel Frequency</label>
+        <select name="travel_freq">
+            <option>Rarely</option>
+            <option>Occasional (1–2 × / month)</option>
+            <option>Frequent (weekly or more)</option>
+            <option>Unpredictable/on‑call</option>
+        </select>
+
+        <label>Cultural or Social Constraints</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="cultural" value="Family norms"> Family norms/expectations</label>
+            <label class="inline"><input type="checkbox" name="cultural" value="Limited time alone"> Limited personal time/space</label>
+            <label class="inline"><input type="checkbox" name="cultural" value="Gender access"> Gender‑based access</label>
+            <label class="inline"><input type="checkbox" name="cultural" value="Religious"> Religious practices</label>
+            <label class="inline"><input type="checkbox" name="cultural" value="None"> None</label>
+        </div>
+
+        <label>Time‑of‑Day Limitations</label>
+        <div class="multi-col">
+            <label class="inline"><input type="checkbox" name="time_limits" value="Morning school runs"> Morning school runs</label>
+            <label class="inline"><input type="checkbox" name="time_limits" value="Work meetings"> Work meetings/deadlines</label>
+            <label class="inline"><input type="checkbox" name="time_limits" value="Evening family time"> Evening family time</label>
+            <label class="inline"><input type="checkbox" name="time_limits" value="Night fatigue"> Night‑time fatigue</label>
+            <label class="inline"><input type="checkbox" name="time_limits" value="None"> No specific limitations</label>
+        </div>
+    </fieldset>
+
+    <!-- ===================================================== -->
+    <button type="submit">Submit</button>
+</form>
+
+<!-- ================  Interactivity  ================= -->
+<script>
+/* Live BMI calculation */
+function calcBMI(){
+    const h=document.getElementById('height').value/100, w=document.getElementById('weight').value;
+    const bmiField=document.getElementById('bmi');
+    if(h>0 && w>0){ bmiField.value=(w/(h*h)).toFixed(1); }
+}
+document.getElementById('height').addEventListener('input',calcBMI);
+document.getElementById('weight').addEventListener('input',calcBMI);
+
+/* Display values next to sliders */
+function linkSlider(id,valId){ const s=document.getElementById(id), v=document.getElementById(valId); s.addEventListener('input',()=>v.textContent=s.value);}
+linkSlider('daysRange','daysVal');
+linkSlider('intensityRange','intensityVal');
+linkSlider('fitnessRange','fitnessVal');
+linkSlider('energyRange','energyVal');
+linkSlider('confidenceRange','confidenceVal');
+linkSlider('fatigueRange','fatigueVal');
+
+/* (Optional) Handle submit – just log to console for now */
+document.getElementById('workoutForm').addEventListener('submit', e=>{
+    e.preventDefault();
+    const data=new FormData(e.target);
+    console.log(Object.fromEntries(data.entries()));
+    alert('Thank you! Data logged to console.');
+});
+</script>
+
+</body>
+</html>
